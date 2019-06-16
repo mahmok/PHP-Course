@@ -1,23 +1,30 @@
 <?php
 
-// Private, Public, Static, Abstract
+// Static, Abstract
 
 class Animal {
     /* Member variables */
     var $name;
+    static $myCount = 0;
     
     function makeSound()
     {
-        echo "Cannot make sound";
+        echo $this->getName().": Cannot make sound";
     }
 
-    function getName()
+    static function PrintParentClass()
+    {
+        echo "Animal Class";
+    }
+
+    protected function getName()
     {
         echo $this->name;
     }
     
     function __construct( $name ) {
         $this->name = $name;
+        Animal::$myCount++;
     }
     
 }
@@ -27,7 +34,7 @@ class Dog extends Animal {
 
     function makeSound()
     {
-        echo "Bark!";
+        echo $this->getName()."Bark!";
     }
 }
 
@@ -58,21 +65,15 @@ class Cat extends Animal
     <?php 
 
         $animal = new Animal("Normal Animal");
+        
 
-        $dog = new Dog("Dog 1");
-        $cat = new Cat("Cat 1");
+        $animal2 = new Animal("Normal Animal 2");
 
-        $animal->getName();
-        $animal->makeSound();
+        $animal3 = new Animal("Normal Animal 3");
+        $animal3 = new Animal("Normal Animal 3");
+        echo Animal::$myCount."<br>";
+        Animal::PrintParentClass();
 
-        echo "<br>";
-        $dog->getName();
-        $dog->makeSound();
-
-        echo "<br>";
-        $cat->getName();
-        $cat->makeSound();
-    
     ?>
 </body>
 </html>

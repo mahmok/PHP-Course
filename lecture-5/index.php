@@ -21,17 +21,15 @@ class Book {
     function getTitle(){
        echo "<h1>".$this->title ."</h1><br/>";
     }
-    /*
+    
     function __construct( $par1, $par2 ) {
         $this->title = $par1;
         $this->price = $par2;
+
+        echo "New Object Created!";
     }
 
-    function __destruct()
-    {
-        
-    }
-    */
+    
  }
 
 
@@ -47,13 +45,14 @@ class Book {
 </head>
 <body>
     <?php 
-        $book = new Book();
-        $book->setPrice(5);
-        $book->setTitle("Harry Potter");
+        $book = new Book("Harry Potter", 5);
 
         $book->getTitle();
         $book->getPrice();
-    
+
+        $book2 = new Book("Book2", 10);
+        $book2->getTitle(); 
+
     ?>
 </body>
 </html>
