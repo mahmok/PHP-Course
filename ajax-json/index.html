@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title>API</title>
+        <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        
+        </style>
+    </head>
+    <body>
+        Welcome to my rest api
+        <br>
+        <br>
+        <br>
+
+        <table id="contacts-table" style="width:100%">
+            <tr>
+              <th>ID</th>
+              <th>Name</th> 
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Actions</th>
+            </tr>
+        </table>
+
+
+        <br>
+        <br>
+        <input type="text" id="name" placeholder="name" />
+        <input type="text" id="email" placeholder="email" />
+        <input type="text" id="mobile" placeholder="mobile" />
+
+        <button onclick="addContact()">Add Contact</button>
+
+
+    </body>
+
+    <script>
+        
+        function addRow(contact)
+        {
+            document.getElementById("contacts-table").innerHTML += ("<tr id='" + contact.id  + "'>" +
+                                                                        "<td>" + contact.id + "</td>" + 
+                                                                        "<td>" + contact.name + "</td>" +
+                                                                        "<td>" + contact.email + "</td>" +
+                                                                        "<td>" + contact.mobile + "</td>" +
+                                                                        "<td> <button onclick='deleteContact(" + contact.id + ")'>delete</button></td>" +
+                                                                    "</tr>");
+        }
+
+        function getContacts() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let contacts =  JSON.parse(this.responseText);
+                    console.log(contacts);
+                    for(let i = 0; i < contacts.length; i++)
+                    {
+                        addRow(contacts[i]);
+                    }
+                }
+            };
+            xhttp.open("GET", "http://localhost/php-mysql-course/ajax-json/contacts.php", true);
+            xhttp.send();
+        }
+        
+        getContacts();
+
+        function addContact()
+        {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let response = JSON.parse(this.responseText);
+                    if(response.status == "success")
+                    {
+                        addRow(response.contact);
+                    }
+                    else
+                    {
+                        alert("Error");
+                    }
+                }
+            };
+            xhttp.open("POST", "http://localhost/php-mysql-course/ajax-json/contacts.php", true);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.send(JSON.stringify({                
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                mobile: document.getElementById('mobile').value
+            }));
+        }
+        
+
+        function deleteContact(id)
+        {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    let response =  JSON.parse(this.responseText);
+                    
+                    if(response.status == "success")
+                    {
+                        alert("Contact Deleted!");
+                        document.getElementById(id).remove();
+                    }
+                    else
+                    {
+                        alert("Cannot delete contact, please try again later");
+                    }
+                }
+            };
+            xhttp.open("GET", "http://localhost/php-mysql-course/ajax-json/contacts.php?delete&id=" + id, true);
+            xhttp.send();
+        }
+
+    
+    
+    </script>
+</html>
