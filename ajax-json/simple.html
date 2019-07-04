@@ -14,6 +14,8 @@
            
        </ul>
 
+       <button onclick="getFile()">Get Data</button>
+
     </body>
 
     <script>
@@ -24,21 +26,23 @@
                 if (this.readyState == 4 && this.status == 200) {
                     console.log(this.responseText);
                     document.getElementById("rawText").innerHTML = this.responseText;
-                    console.log(JSON.parse(this.responseText));
-                    let response = JSON.parse(this.responseText);
+                    //console.log(JSON.parse(this.responseText));
+                    let s = JSON.parse(this.responseText);
+                    console.log(s);
+                    console.log(s.name);
 
-                    document.getElementById("name").innerHTML += response.name;
-                    document.getElementById("email").innerHTML += response.email;
-                    document.getElementById("likes").innerHTML += ("<li>" + response.likes[0] + "</li>" + 
-                                                                    "<li>" + response.likes[1] + "</li>" + 
-                                                                    "<li>" + response.likes[2] + "</li>"); 
+                    document.getElementById("name").innerHTML += s.name;
+                    document.getElementById("email").innerHTML += s.email;
+                    document.getElementById("likes").innerHTML += ("<li>" + s.likes[0] + "</li>" + 
+                                                                    "<li>" + s.likes[1] + "</li>" + 
+                                                                    "<li>" + s.likes[2] + "</li>"); 
                 }
             };
             xhttp.open("GET", "http://localhost/php-mysql-course/ajax-json/txt.json", true);
             xhttp.send();
         }
         
-        getFile();
+        
 
 
 

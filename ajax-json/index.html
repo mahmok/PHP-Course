@@ -54,6 +54,7 @@
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
                     let contacts =  JSON.parse(this.responseText);
                     console.log(contacts);
                     for(let i = 0; i < contacts.length; i++)
@@ -74,6 +75,7 @@
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     let response = JSON.parse(this.responseText);
+                    console.log(response);
                     if(response.status == "success")
                     {
                         addRow(response.contact);

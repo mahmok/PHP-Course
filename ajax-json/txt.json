@@ -3,5 +3,9 @@
     "email": "mahmok@gmail.com",
     "mobile": "12344",
     "likes": ["dogs", "programming", "machine learning", "SCUBA diving"],
-    "id": 1
+    "id": 1,
+    "parent": {
+        "name": "Mokhtar Hassan",
+        "asd": "asd"
+    } 
 }

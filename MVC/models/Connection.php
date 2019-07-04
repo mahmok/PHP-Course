@@ -4,7 +4,7 @@ class Connection
     var $servername = "localhost";
     var $username = "root";
     var $password = "";
-    var $databaseName = "contactsapp";
+    var $databaseName = "MVC";
     var $connection;
 
     function createConnection()

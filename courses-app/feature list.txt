@@ -1,0 +1,12 @@
+1- Signup Students
+2- Login (Teachers, Admins, Students)
+3- Admins must be able to create courses
+4- Admins must be able to create teachers
+5- Admins must be able to assign teachers to courses
+6- Admins must be able to view all courses
+7- Admins must be able to view all teachers
+8- Admins must be able to view all students
+9- Teachers must be able to view their courses with their students
+10- Students can view all courses
+11- Students can view their courses they joined
+12- Students can join/leave courses
