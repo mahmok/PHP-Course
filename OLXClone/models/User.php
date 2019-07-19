@@ -1,6 +1,6 @@
 <?php 
 
-require("./Connection.php");
+require_once("Connection.php");
 
 class User
 {
@@ -42,7 +42,7 @@ class User
         {
             $lastId = $conn->getLastInsertedId();
         }
-        
+        $conn->closeConnection();
 
         return $lastId;
 

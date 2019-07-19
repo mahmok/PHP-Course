@@ -1,4 +1,6 @@
 <?php
+
+
 class Connection 
 {
     var $servername = "localhost";
