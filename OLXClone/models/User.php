@@ -29,6 +29,20 @@ class User
 
 
     }
+    
+    static function getUserById($id)
+    {
+        $conn = new Connection();
+        $conn->createConnection();
+
+        $result = $conn->executeQuery("SELECT * FROM users WHERE id = '$id'");
+
+        $user = mysqli_fetch_object($result);
+
+        $conn->closeConnection();
+ 
+        return $user;
+    }
 
     static function signup($name, $password, $mobile, $email)
     {

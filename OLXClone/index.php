@@ -6,7 +6,6 @@ require("./controllers/UsersController.php");
 
 if(isset($_SERVER['REDIRECT_URL']))
 {
-    echo $_SERVER['REDIRECT_URL']."<br>";
     $path = explode("/", $_SERVER['REDIRECT_URL']);
 
     if($path[3] == "posts")
@@ -53,7 +52,11 @@ if(isset($_SERVER['REDIRECT_URL']))
         $usersController = new UsersController();
         if($_SERVER["REQUEST_METHOD"] == "GET")
         {
-
+            if(isset($path[4]))
+            {
+                echo $usersController->getById($path[4]);
+                return;
+            }
         }
         else
         {
@@ -63,13 +66,17 @@ if(isset($_SERVER['REDIRECT_URL']))
                 echo $usersController->login($requestBody);
                 return;
             }
-            else
+            else if(isset($path[4]) && $path[4] == "signup")
             {
                 $requestBody = file_get_contents('php://input');
                 echo $usersController->signup($requestBody);
                 return;
             }
         }
+    }
+    else if($path[3] == "home")
+    {
+        header("location: views/home.html");
     }
     else
     {
